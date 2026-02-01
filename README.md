@@ -6,7 +6,7 @@ Lightweight ETL for the SVR fitting on the diabetes dataset designed to run on a
 
 ![AWS ETL architecture](assets/aws%20diagram.png)
 
-1. EC2 runs the `files/scripts` Python code and ships the generated result JSON to an S3 bucket`. The code fits the diabetes dataset from sklearn with randomly generated hyperparameter $\gamma,C,\epsilon$ values. Executions are dictated by a cronjob.
+1. EC2 runs the `files/scripts` Python code and ships the generated result JSON to an S3 bucket. The code fits the diabetes dataset from sklearn with randomly generated hyperparameter $\gamma,C,\epsilon$ values. Executions are dictated by a cronjob.
 2. The `queries/` SQL defines external tables (`data`, `hyperparams`, `predict`) that directly read those objects.
 3. `final_query.sql` joins the tables, evaluates each model (test R²), and orders them by fit quality.
 
@@ -26,7 +26,7 @@ Lightweight ETL for the SVR fitting on the diabetes dataset designed to run on a
 - `files/` – supporting shell scripts, generated data, and Python tooling.
 - `files/diabetes_data/` – exported `diabetes_data.json` (newline-delimited JSON) created from scikit-learn’s dataset.
 - `files/scripts/` – Python helpers described below.
-- `queries/` – Hive/Presto DDL for external tables plus the R² evaluation query.
+- `queries/` – sql files for external table creation plus the R² evaluation query.
 - `results/` – example outputs from previous pipeline runs (S3-style JSON and CSV final result).
 - `crontab.txt` – cron entry to run `files/runpipeline.sh` every minute (used for automated EC2 scheduling).
 
@@ -49,3 +49,6 @@ Lightweight ETL for the SVR fitting on the diabetes dataset designed to run on a
 
 - `queries/create_data_table.sql`, `create_hyperparams_table.sql`, `create_predict_table.sql` – create external tables on `database-1` with JSON SerDe pointing at the S3 prefixes.
 - `queries/final_query.sql` – window functions compute SSE/variance per `hyper_id`, join with `hyperparams`, and sort hyperparameter combinations by measured R² for non-training rows.
+
+## TODO
+- Add IAM roles/permissions
