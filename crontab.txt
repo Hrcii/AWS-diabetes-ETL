@@ -1,0 +1,2 @@
+MAILTO=""
+* * * * * /home/ec2-user/files/runpipeline.sh
