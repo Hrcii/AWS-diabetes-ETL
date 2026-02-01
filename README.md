@@ -35,7 +35,7 @@ Lightweight ETL for the SVR fitting on the diabetes dataset designed to run on a
 1. Install dependencies inside EC2: `files/ec2_setup.sh` installs system tools and `numpy`/`scikit-learn` via `pip`.
 2. Generate the local dataset: from `files/scripts`, run `python create_data_json.py` to dump `files/diabetes_data/diabetes_data.json`.
 3. Launch the training pipeline: `files/runpipeline.sh` calls `files/scripts/run.py`, copies the `<timestamp>_hyper.json` and `<timestamp>_fact.json` files to their respective S3 prefixes, and deletes the temporary JSONs afterward.
-4. Optionally, schedule `runpipeline.sh` via the cronjob defined in `crontab.txt` so the job runs periodically on EC2.
+4. Schedule `runpipeline.sh` via the cronjob defined in `crontab.txt` so the job runs periodically on EC2.
 
 ## Script details
 
