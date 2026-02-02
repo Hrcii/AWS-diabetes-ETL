@@ -52,3 +52,4 @@ Lightweight ETL for the SVR fitting on the diabetes dataset designed to run on a
 
 ## TODO
 - Add IAM roles/permissions
+- Build an EventBridge/Lambda variant of the pipeline
